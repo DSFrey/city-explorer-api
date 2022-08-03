@@ -23,11 +23,11 @@ app.get('/forecast', (request, response) => {
     let locationData = data.find(location => location.city_name === search);
     //|| data.find(location => parseInt(location.lat).round() === parseInt(lat).round() && parseInt(location.lon).round() === parseInt(lon).round());
     let returnForecast = locationData.data.map((dailyData) => new Forecast(dailyData));
-    console.log(returnForecast);
+    // console.log(returnForecast);
     response.send(returnForecast);
   } catch(error){
-    console.log(error);
-    response.send(error);
+    console.log('HALP!!',error);
+    response.status(500).send('Forecast not found for this location');
   }
 });
 // Class for constructing our object

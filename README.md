@@ -29,8 +29,8 @@ Provides the backend for the city explorer project
 |---|---|
 |Estimate of time needed to complete|1 hour 30 minutes|
 |Start time|4:50 PM|
-|Finish time|4:50 PM|
-|Actual time needed to complete|20 minutes|
+|Finish time|late|
+|Actual time needed to complete|3.5 hours so far?|
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->

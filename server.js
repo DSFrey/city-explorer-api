@@ -8,6 +8,7 @@ require('dotenv').config();
 let data = require('./data/weather.json');
 const cors = require('cors');
 const {response} = require('express');
+const axios = require('axios');
 
 // Use
 const app = express();
@@ -15,26 +16,25 @@ app.use(cors());
 const PORT = process.env.PORT || 3002;
 
 // Routes
-app.get('/forecast', (request, response) => {
+app.get('/forecast', async (request, response) => {
   try{
-    let search = request.query.search;
-    // let lat = request.query.lat;
-    // let lon = request.query.lon;
-    let locationData = data.find(location => location.city_name === search);
-    //|| data.find(location => parseInt(location.lat).round() === parseInt(lat).round() && parseInt(location.lon).round() === parseInt(lon).round());
-    let returnForecast = locationData.data.map((dailyData) => new Forecast(dailyData));
-    // console.log(returnForecast);
+    let forecastData = await axios.get(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${parseInt(request.query.lat)}&lon=${parseInt(request.query.lon)}&units=I&days=8&key=${process.env.WEATHER_API_KEY}`);
+    let returnForecast = forecastData.data.data.map((dailyData) => new Forecast(dailyData));
     response.send(returnForecast);
   } catch(error){
-    console.log('HALP!!',error);
     response.status(500).send('Forecast not found for this location');
   }
 });
-// Class for constructing our object
+
+// Class for constructing object
 
 class Forecast {
   constructor(dailyData) {
-    this.description = `Low of ${dailyData.low_temp}, high of ${dailyData.high_temp} with ${dailyData.weather.description}.`;
+    this.icon = `https://www.weatherbit.io/static/img/icons/${dailyData.weather.icon}.png`
+    this.description = dailyData.weather.description;
+    this.rain = dailyData.pop;
+    this.high = dailyData.max_temp;
+    this.low = dailyData.min_temp;
     this.date = dailyData.datetime;
   }
 }

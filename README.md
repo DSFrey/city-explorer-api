@@ -40,5 +40,12 @@ Provides the backend for the city explorer project
 |Finish time|6:00 PM|
 |Actual time needed to complete|1 hour|
 
+|Modularize back-end||
+|---|---|
+|Estimate of time needed to complete|1 hour |
+|Start time|9:00 PM|
+|Finish time|10:00 PM|
+|Actual time needed to complete|1 hour|
+
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->

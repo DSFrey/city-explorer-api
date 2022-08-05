@@ -9,6 +9,7 @@ let data = require('./data/weather.json');
 const cors = require('cors');
 const {response} = require('express');
 const axios = require('axios');
+const getMovies = require('./modules/getMovies.js')
 
 // Use
 const app = express();
@@ -19,12 +20,15 @@ const PORT = process.env.PORT || 3002;
 app.get('/forecast', async (request, response) => {
   try{
     let forecastData = await axios.get(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${parseInt(request.query.lat)}&lon=${parseInt(request.query.lon)}&units=I&days=8&key=${process.env.WEATHER_API_KEY}`);
+    console.log(forecastData);
     let returnForecast = forecastData.data.data.map((dailyData) => new Forecast(dailyData));
     response.send(returnForecast);
   } catch(error){
-    response.status(500).send('Forecast not found for this location');
+    response.status(error.response.status).send('Forecast not found for this location');
   }
 });
+
+app.get('/movies', getMovies);
 
 // Class for constructing object
 

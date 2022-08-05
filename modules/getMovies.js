@@ -13,13 +13,17 @@ function getMovies(request, response) {
   };
   if (cache[key] && (Date.now() - cache[key].timestamp < 86400000)) {
     console.log('Cache hit');
+    response.status(200).send(cache[key].data);
   } else {
     console.log('Cache miss');
     cache[key] = {};
     cache[key].timestamp = Date.now();
-    cache[key].data = axios.get(url, { params })
+    axios.get(url, { params })
       .then(reply => reply.data.results.map(movie => new Movie(movie)))
-      .then(packagedData => response.status(200).send(packagedData))
+      .then(packagedData => {
+        cache[key].data = packagedData;
+        response.status(200).send(packagedData);
+      })
       .catch(error => response.status(error.response.status).send(error));
   }
 }

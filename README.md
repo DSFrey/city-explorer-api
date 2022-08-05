@@ -4,6 +4,7 @@
 **Version**: 1.0.0
 
 ## Overview
+
 Provides the backend for the city explorer project
 
 ## Getting Started
@@ -11,7 +12,7 @@ Provides the backend for the city explorer project
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
-![web request-response cycle](https://drive.google.com/file/d/1h7qL_9B9WuB9aYEv0g7KfYmfX1qStBri/view?usp=sharing)
+![web request-response cycle](./img/city-explorer-wrrc.drawio.png)
 
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
@@ -30,7 +31,14 @@ Provides the backend for the city explorer project
 |Estimate of time needed to complete|1 hour 30 minutes|
 |Start time|4:50 PM|
 |Finish time|late|
-|Actual time needed to complete|3.5 hours so far?|
+|Actual time needed to complete|3.5 hours|
+
+|Weather info live||
+|---|---|
+|Estimate of time needed to complete|1 hour 30 minutes|
+|Start time|5:00 PM|
+|Finish time|6:00 PM|
+|Actual time needed to complete|1 hour|
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->

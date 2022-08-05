@@ -1,22 +1,31 @@
 const axios = require('axios');
 const express = require('express');
 const app = express();
+let cache = require('./cache');
 
 function getForecast(request, response) {
+  const { lat, lon } = request.query;
+  const key = `weather_${lat}_${lon}`;
   let url = 'https://api.weatherbit.io/v2.0/forecast/daily';
   let params = {
     key: process.env.WEATHER_API_KEY,
-    lat: request.query.lat,
-    lon: request.query.lon,
+    lat: lat,
+    lon: lon,
     units: 'I',
     days: 8,
   };
-  axios.get(url, { params })
-    .then(reply => reply.data.data.map((dailyData) => new Forecast(dailyData)))
-    .then(packagedData => response.status(200).send(packagedData))
-    .catch(error => response.status(error.response.status).send(error));
+  if (cache[key] && (Date.now() - cache[key].timestamp < 600000)) {
+    console.log('Cache hit');
+  } else {
+    console.log('Cache miss');
+    cache[key] = {};
+    cache[key].timestamp = Date.now();
+    cache[key].data = axios.get(url, { params })
+      .then(reply => reply.data.data.map((dailyData) => new Forecast(dailyData)))
+      .then(packagedData => response.status(200).send(packagedData))
+      .catch(error => response.status(error.response.status).send(error));
+  }
 }
-
 
 class Forecast {
   constructor(dailyData) {

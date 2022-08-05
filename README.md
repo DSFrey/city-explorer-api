@@ -47,5 +47,12 @@ Provides the backend for the city explorer project
 |Finish time|10:00 PM|
 |Actual time needed to complete|1 hour|
 
+|Implement Cache||
+|---|---|
+|Estimate of time needed to complete|2 hour |
+|Start time|3:00 PM|
+|Finish time|4:30 PM|
+|Actual time needed to complete|1.5 hour|
+
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
